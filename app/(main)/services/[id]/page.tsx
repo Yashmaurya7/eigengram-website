@@ -17,7 +17,8 @@ import Link from "next/link";
 
 export async function generateStaticParams() {
   const services = await db.service.findMany({ select: { id: true } });
-  return services.map((service) => ({ id: service.id }));
+  return services.map((service: { id: string }) => ({ id: service.id }));
+  
 }
 
 export default async function ServicePage({

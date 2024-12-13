@@ -3,12 +3,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+export default async function SubscribedServices() {
+  const { getUser } = await getKindeServerSession();
+  const user = await getUser();
+  const userId=user?.id
 
-export default async function SubscribedServices({
-  userId,
-}: {
-  userId: string;
-}) {
   const subscriptions = await db.subscription.findMany({
     where: {
       userId,
